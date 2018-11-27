@@ -29,13 +29,42 @@ do
 		echo "temperature was not available. Check sensor and sensor power"
 	fi
 
-	if test "$diff" -ge $counter
-	then
-		gpio write $pin 1; #turn 1st led on
+	#if test "$diff" -ge $counter
+	#then
+	#	gpio write $pin 1; #turn 1st led on
+#
+#		((counter++ ))
+#		((pin ++))
+#	fi
 
-		((counter++ ))
-		((pin ++))
+
+        if test "$diff" -lt 1
+        then
+                gpio write 0 0;
+                gpio write 1 0;
+                gpio write 2 0;
+        fi
+
+	
+	if test "$diff" -ge 1 && test "$diff" -lt 2
+	then
+		gpio write 0 1;
+		gpio write 1 0;
+		gpio write 2 0;
 	fi
 
+    if test "$diff" -ge 2 && test "$diff" -lt 3
+        then
+                gpio write 0 1;
+                gpio write 1 1;
+                gpio write 2 0;
+        fi
+
+    if test "$diff" -ge 3 && test "$diff" -lt 4
+        then
+                gpio write 0 1;
+                gpio write 1 1;
+                gpio write 2 1;
+        fi
 	
 done

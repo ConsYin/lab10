@@ -58,6 +58,7 @@ void tempRead(char *serialNum, int verbose)
   strcat(path, serialNum); /*concatenate the device serial  */
   strcat(path, "/w1_slave"); /*concatenate the text file that contains the temp, now full path is done*/
 
+ 
 
   if(serialNum == NULL)
   {
@@ -86,7 +87,14 @@ void tempRead(char *serialNum, int verbose)
   
   buf[n] = '\0'; /*terminate array with null character*/
   
-   /* fprintf(stdout, "Read '%s'\n", buf);  testing the reading of the file */
+ if(verbose == 1)
+{
+        printf("buffer is %s ",buf);
+}
+ 
+
+
+  /* fprintf(stdout, "Read '%s'\n", buf);  testing the reading of the file */
   
    strncpy(temperature, strstr(buf, "t=") + 2, 5);  /*skip 2 characters (t=) and count the next 5 (the temp) and copy into array temperature*/
    temperature[5]='\0'; /*terminate array with null character*/
